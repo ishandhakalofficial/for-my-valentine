@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Valentine ❤️</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Romantic Pink Gradient */
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            margin: 0;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', sans-serif;
+            /* Cuter font */
+            overflow: hidden;
+            flex-direction: column;
+            color: #d81b60;
+            text-align: center;
+        }
+
+        /* --- Background Decorations --- */
+        .bg-decoration {
+            position: absolute;
+            font-size: 5rem;
+            /* Bigger! */
+            opacity: 0.25;
+            /* Slightly more visible */
+            pointer-events: none;
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Sections --- */
+        .section {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            max-width: 500px;
+            /* Better for mobile */
+            padding: 25px;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.6);
+            /* More glass */
+            backdrop-filter: blur(8px);
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .section.active {
+            display: flex;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+
+            70% {
+                transform: scale(0.9);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* --- Heart Animation --- */
+        .heart-container {
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .heart-container:hover {
+            transform: scale(1.1);
+        }
+
+        .heart {
+            position: relative;
+            background-color: #ff4081;
+            width: 80px;
+            height: 80px;
+            transform: rotate(-45deg);
+            animation: beat 1s infinite;
+            margin: 0 auto;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            background-color: #ff4081;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -40px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 40px;
+            top: 0;
+        }
+
+        @keyframes beat {
+            0% {
+                transform: scale(1) rotate(-45deg);
+            }
+
+            50% {
+                transform: scale(1.1) rotate(-45deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(-45deg);
+            }
+        }
+
+        /* --- Text --- */
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: #c2185b;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.4;
+            color: #880e4f;
+        }
+
+        /* --- Buttons --- */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            font-weight: bold;
+        }
+
+        .btn-yes {
+            background-color: #ff4081;
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 64, 129, 0.3);
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+            background-color: #f50057;
+        }
+
+        .btn-no {
+            background-color: #ffcdd2;
+            color: #b71c1c;
+        }
+
+        .btn-no:hover {
+            background-color: #ef9a9a;
+        }
+
+        /* --- Form --- */
+        .form-group {
+            text-align: left;
+            width: 100%;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #c2185b;
+        }
+
+        .option {
+            margin: 8px 0;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        input[type="radio"] {
+            transform: scale(1.3);
+            margin-right: 10px;
+            accent-color: #ff4081;
+        }
+
+        /* --- Modal --- */
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            /* Light overlay */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 85%;
+            box-shadow: 0 15px 50px rgba(255, 64, 129, 0.2);
+            border: 3px solid #ff80ab;
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0.5);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        /* --- Footer --- */
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            color: #ad1457;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            font-weight: bold;
+        }
+
+        /* --- Mobile Tweaks --- */
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .heart {
+                width: 60px;
+                height: 60px;
+            }
+
+            .heart::before,
+            .heart::after {
+                width: 60px;
+                height: 60px;
+            }
+
+            .heart::before {
+                top: -30px;
+            }
+
+            .heart::after {
+                left: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background Decorations -->
+    <div class="bg-decoration" style="top: 5%; left: 5%;">🧸</div>
+    <div class="bg-decoration" style="top: 15%; left: 30%;">🌹</div>
+    <div class="bg-decoration" style="top: 10%; right: 10%;">🧸</div>
+    <div class="bg-decoration" style="top: 25%; right: 25%;">🌸</div>
+
+    <div class="bg-decoration" style="top: 40%; left: 2%;">🌹</div>
+    <div class="bg-decoration" style="top: 50%; right: 5%;">🧸</div>
+    <div class="bg-decoration" style="top: 60%; left: 15%;">🌸</div>
+
+    <div class="bg-decoration" style="bottom: 25%; left: 5%;">🧸</div>
+    <div class="bg-decoration" style="bottom: 30%; right: 15%;">🌹</div>
+    <div class="bg-decoration" style="bottom: 10%; left: 25%;">🌸</div>
+    <div class="bg-decoration" style="bottom: 5%; right: 5%;">🧸</div>
+    <div class="bg-decoration" style="bottom: 5%; left: 45%;">🌹</div>
+
+    <!-- SECTION 1: Welcome -->
+    <div id="page-welcome" class="section active">
+        <div class="heart-container" onclick="nextSection('page-proposal')">
+            <div class="heart"></div>
+        </div>
+        <h1>Happy Valentine's Day!</h1>
+        <p>You make my world so much brighter! 🌸</p>
+        <button class="btn-yes" onclick="nextSection('page-proposal')">Open Letter 💌</button>
+    </div>
+
+    <!-- SECTION 2: Proposal -->
+    <div id="page-proposal" class="section">
+        <div class="heart" style="transform: scale(0.6) rotate(-45deg); margin-bottom: 2rem;"></div>
+        <h1>Will you be my Valentine?</h1>
+        <div class="btn-group">
+            <button class="btn-yes" onclick="handleYes()">YES! 🧸</button>
+            <button class="btn-no" onclick="handleNo()">No �</button>
+        </div>
+    </div>
+
+    <!-- SECTION 3: Preferences -->
+    <div id="page-preferences" class="section">
+        <h2>Yay! Let's plan! 🧸</h2>
+        <div class="form-group">
+            <label>Food? 🍕</label>
+            <div class="option"><input type="radio" name="food" value="Pizza"> Pizza Party</div>
+            <div class="option"><input type="radio" name="food" value="Sushi"> Sushi Date</div>
+            <div class="option"><input type="radio" name="food" value="Dessert"> Just Dessert</div>
+        </div>
+        <div class="form-group">
+            <label>Activity? 🎬</label>
+            <div class="option"><input type="radio" name="activity" value="Movie"> Movie Night</div>
+            <div class="option"><input type="radio" name="activity" value="Stars"> Star Gazing</div>
+            <div class="option"><input type="radio" name="activity" value="Cuddles"> Just Cuddles</div>
+        </div>
+        <button class="btn-yes" onclick="finishProposal()">Send to My Heart �</button>
+    </div>
+
+    <!-- SECTION 4: Finale -->
+    <div id="page-finale" class="section">
+        <div class="heart"></div>
+        <h1>It's a Date! 🌹</h1>
+        <p id="final-message"></p>
+        <p id="romantic-quote" style="margin-top: 1.5rem; font-style: italic; color: #880e4f;"></p>
+    </div>
+
+    <!-- MODAL -->
+    <div id="modal">
+        <div class="modal-content">
+            <h2 id="modal-text">Are you sure? 🥺</h2>
+            <div class="btn-group">
+                <button class="btn-yes" onclick="modalYes()">Yes! 😍</button>
+                <button class="btn-no" onclick="modalNo()">No 😢</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">Created by: 0xIshan</div>
+
+    <script>
+        function nextSection(id) {
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        const noMessages = [
+            "Are you sure? 🥺",
+            "Pretty please? �",
+            "I'll be so sad... 😢",
+            "Think again! 🌸",
+            "You are my favorite! 💖",
+            "Don't do this! 😭"
+        ];
+        let noCount = 0;
+
+        function handleYes() { nextSection('page-preferences'); }
+
+        function handleNo() {
+            noCount = 0; // Reset
+            document.getElementById('modal-text').innerText = noMessages[0];
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function modalYes() {
+            document.getElementById('modal').style.display = 'none';
+            handleYes();
+        }
+
+        function modalNo() {
+            noCount++;
+            // Loop through messages
+            document.getElementById('modal-text').innerText = noMessages[noCount % noMessages.length];
+            // Maybe grow the Yes button?
+            // const yesBtn = document.querySelector('#modal .btn-yes');
+            // yesBtn.style.transform = `scale(${1 + noCount * 0.1})`;
+        }
+
+        // --- Finale ---
+        const romanticQuotes = [
+            "You are my favorite notification.",
+            "Life is better with you.",
+            "You're the teddy bear I want to hug forever.",
+            "I love you more than pizza. And that's a lot.",
+            "You are my happy place."
+        ];
+
+        async function finishProposal() {
+            const food = document.querySelector('input[name="food"]:checked')?.value || "Yummy Food";
+            const activity = document.querySelector('input[name="activity"]:checked')?.value || "Fun Stuff";
+
+            document.getElementById('final-message').innerHTML = `We are having <b>${food}</b> and <b>${activity}</b>!`;
+            document.getElementById('romantic-quote').innerText = romanticQuotes[Math.floor(Math.random() * romanticQuotes.length)];
+
+            const data = { food, activity, date: new Date().toISOString() };
+            try {
+                await fetch('/save_response', { method: 'POST', body: JSON.stringify(data) });
+            } catch (e) {
+                downloadResponse(data);
+            }
+            nextSection('page-finale');
+        }
+
+        function downloadResponse(data) {
+            const blob = new Blob([`DATE: ${new Date()}\nFood: ${data.food}\nAct: ${data.activity}`], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'OurDate.txt';
+            a.click();
+        }
+    </script>
+</body>
+
+</html>
