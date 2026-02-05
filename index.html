@@ -5,456 +5,791 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Valentine ❤️</title>
+
     <style>
+        :root {
+            /* New Pastel Palette */
+            --primary: #d81b60;
+            /* Kept for text contrast, but can soften if needed */
+            --soft-pink: #ffcdd2;
+            --lavender: #e1bee7;
+            --cream: #fff9c4;
+            --peach: #ffccbc;
+            --baby-blue: #bbdefb;
+
+            /* Gradient Background */
+            --bg1: #fce4ec;
+            /* Very light pink */
+            --bg2: #f3e5f5;
+            /* Very light purple */
+            --bg3: #fff3e0;
+            /* Very light orange/cream */
+        }
+
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            /* Romantic Pink Gradient */
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-            margin: 0;
-            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', sans-serif;
-            /* Cuter font */
-            overflow: hidden;
-            flex-direction: column;
-            color: #d81b60;
-            text-align: center;
-        }
-
-        /* --- Background Decorations --- */
-        .bg-decoration {
-            position: absolute;
-            font-size: 5rem;
-            /* Bigger! */
-            opacity: 0.25;
-            /* Slightly more visible */
-            pointer-events: none;
-            z-index: -1;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-
-            100% {
-                transform: translateY(0);
-            }
-        }
-
-        /* --- Sections --- */
-        .section {
-            display: none;
-            flex-direction: column;
+            display: flex;
             align-items: center;
-            width: 90%;
-            max-width: 500px;
-            /* Better for mobile */
-            padding: 25px;
-            box-sizing: border-box;
-            background: rgba(255, 255, 255, 0.6);
-            /* More glass */
-            backdrop-filter: blur(8px);
-            border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        }
-
-        .section.active {
-            display: flex;
-        }
-
-        @keyframes bounceIn {
-            0% {
-                transform: scale(0.3);
-                opacity: 0;
-            }
-
-            50% {
-                transform: scale(1.05);
-                opacity: 1;
-            }
-
-            70% {
-                transform: scale(0.9);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        /* --- Heart Animation --- */
-        .heart-container {
-            margin-bottom: 1.5rem;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .heart-container:hover {
-            transform: scale(1.1);
-        }
-
-        .heart {
-            position: relative;
-            background-color: #ff4081;
-            width: 80px;
-            height: 80px;
-            transform: rotate(-45deg);
-            animation: beat 1s infinite;
-            margin: 0 auto;
-        }
-
-        .heart::before,
-        .heart::after {
-            content: "";
-            position: absolute;
-            background-color: #ff4081;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-        }
-
-        .heart::before {
-            top: -40px;
-            left: 0;
-        }
-
-        .heart::after {
-            left: 40px;
-            top: 0;
-        }
-
-        @keyframes beat {
-            0% {
-                transform: scale(1) rotate(-45deg);
-            }
-
-            50% {
-                transform: scale(1.1) rotate(-45deg);
-            }
-
-            100% {
-                transform: scale(1) rotate(-45deg);
-            }
-        }
-
-        /* --- Text --- */
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            color: #c2185b;
-        }
-
-        p {
-            font-size: 1.2rem;
-            line-height: 1.4;
-            color: #880e4f;
-        }
-
-        /* --- Buttons --- */
-        .btn-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-            flex-wrap: wrap;
             justify-content: center;
+            flex-direction: column;
+            margin: 0;
+            font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif;
+            background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+            background-size: 400% 400%;
+            animation: bg 18s ease infinite;
+            color: var(--primary);
+            text-align: center;
+            overflow: hidden;
+            /* Prevent scrollbars from floating elements */
+            position: relative;
         }
 
-        button {
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-            font-weight: bold;
+        @keyframes bg {
+            0% {
+                background-position: 0% 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+
+            100% {
+                background-position: 0% 50%
+            }
         }
 
-        .btn-yes {
-            background-color: #ff4081;
-            color: white;
-            box-shadow: 0 4px 10px rgba(255, 64, 129, 0.3);
-        }
-
-        .btn-yes:hover {
-            transform: scale(1.1);
-            background-color: #f50057;
-        }
-
-        .btn-no {
-            background-color: #ffcdd2;
-            color: #b71c1c;
-        }
-
-        .btn-no:hover {
-            background-color: #ef9a9a;
-        }
-
-        /* --- Form --- */
-        .form-group {
-            text-align: left;
-            width: 100%;
-            margin-bottom: 15px;
-            background: rgba(255, 255, 255, 0.5);
-            padding: 15px;
-            border-radius: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #c2185b;
-        }
-
-        .option {
-            margin: 8px 0;
-            font-size: 1.1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
-
-        input[type="radio"] {
-            transform: scale(1.3);
-            margin-right: 10px;
-            accent-color: #ff4081;
-        }
-
-        /* --- Modal --- */
-        #modal {
-            display: none;
-            position: fixed;
+        /* Floating Background Styles */
+        .floating-bg {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            /* Light overlay */
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+            /* Let clicks pass through */
         }
 
-        .modal-content {
-            background: white;
-            padding: 40px;
+        .float-item {
+            position: absolute;
+            opacity: 0.6;
+            animation: float 20s infinite linear;
+            font-size: 2rem;
+            filter: blur(1px);
+            /* Slight blur for depth/softness */
+        }
+
+        /* Randomize animation durations and types via JS usually, but here some basics */
+        @keyframes float {
+            0% {
+                transform: translateY(110vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.7;
+            }
+
+            90% {
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .section {
+            display: none;
+            width: 90%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.6);
+            /* More transparent for glassmorphism */
+            backdrop-filter: blur(12px);
+            /* Blur effect behind the card */
+            -webkit-backdrop-filter: blur(12px);
+            padding: 30px;
             border-radius: 30px;
-            text-align: center;
-            max-width: 85%;
-            box-shadow: 0 15px 50px rgba(255, 64, 129, 0.2);
-            border: 3px solid #ff80ab;
-            animation: popIn 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, .1);
+            animation: fade .5s ease;
+            margin: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            z-index: 10;
+            /* Ensure card is above background */
+            border: 2px solid rgba(255, 255, 255, 0.5);
         }
 
-        @keyframes popIn {
+        .section.active {
+            display: block
+        }
+
+        @keyframes fade {
             from {
-                transform: scale(0.5);
+                opacity: 0;
+                transform: translateY(15px)
             }
 
             to {
-                transform: scale(1);
+                opacity: 1
             }
         }
 
-        /* --- Footer --- */
-        .footer {
-            position: fixed;
-            bottom: 10px;
-            width: 100%;
+        input[type=text],
+        input[type=date] {
+            width: 80%;
+            padding: 12px;
+            border-radius: 25px;
+            border: 2px solid var(--primary);
+            font-size: 1.05rem;
+            margin: 10px 0;
             text-align: center;
-            color: #ad1457;
+            outline: none;
+            color: var(--primary);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        input.error {
+            border-color: #ff0000;
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            50% {
+                transform: translateX(5px);
+            }
+
+            75% {
+                transform: translateX(-5px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        button {
+            border: none;
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            cursor: pointer;
+            background: var(--primary);
+            color: white;
+            margin-top: 20px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3);
+        }
+
+        button:hover {
+            opacity: .95;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(216, 27, 96, 0.4);
+        }
+
+        /* Questionnaire Styling */
+        .q-group {
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .q-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            padding-left: 10px;
+        }
+
+        .q-group input[type=text] {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .radio-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        .radio-group label {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 2px solid var(--primary);
+            cursor: pointer;
             font-size: 0.9rem;
-            opacity: 0.7;
+            font-weight: normal;
+        }
+
+        .radio-group input {
+            display: none;
+        }
+
+        .radio-group input:checked+label {
+            background: var(--primary);
+            color: white;
+        }
+
+
+        .color-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .color-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 3px solid white;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+            transition: transform 0.2s;
+        }
+
+        .color-btn.selected {
+            transform: scale(1.2);
+            border-color: var(--primary);
+        }
+
+        .heart {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            transform: rotate(-45deg);
+            margin: 20px auto;
+            animation: beat 1s infinite;
+            position: relative;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart:before {
+            top: -30px;
+            left: 0
+        }
+
+        .heart:after {
+            left: 30px;
+            top: 0
+        }
+
+        @keyframes beat {
+            0% {
+                transform: scale(1) rotate(-45deg)
+            }
+
+            50% {
+                transform: scale(1.12) rotate(-45deg)
+            }
+
+            100% {
+                transform: scale(1) rotate(-45deg)
+            }
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .options label {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 14px;
+            border-radius: 20px;
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            font-size: .9rem;
+        }
+
+        .options input {
+            display: none
+        }
+
+        .options input:checked+label {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Inline Error Message */
+        .error-msg {
+            color: #d32f2f;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
             font-weight: bold;
         }
 
-        /* --- Mobile Tweaks --- */
-        @media (max-width: 400px) {
-            h1 {
-                font-size: 1.8rem;
-            }
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            font-size: .8rem;
+            opacity: .6;
+            pointer-events: auto;
+            /* Allow clicking links */
+            z-index: 5;
+        }
 
-            .heart {
-                width: 60px;
-                height: 60px;
-            }
+        .footer a {
+            color: inherit;
+            text-decoration: none;
+            font-weight: 500;
+        }
 
-            .heart::before,
-            .heart::after {
-                width: 60px;
-                height: 60px;
-            }
-
-            .heart::before {
-                top: -30px;
-            }
-
-            .heart::after {
-                left: 30px;
-            }
+        .footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Background Decorations -->
-    <div class="bg-decoration" style="top: 5%; left: 5%;">🧸</div>
-    <div class="bg-decoration" style="top: 15%; left: 30%;">🌹</div>
-    <div class="bg-decoration" style="top: 10%; right: 10%;">🧸</div>
-    <div class="bg-decoration" style="top: 25%; right: 25%;">🌸</div>
+    <div class="floating-bg" id="bg-container"></div>
 
-    <div class="bg-decoration" style="top: 40%; left: 2%;">🌹</div>
-    <div class="bg-decoration" style="top: 50%; right: 5%;">🧸</div>
-    <div class="bg-decoration" style="top: 60%; left: 15%;">🌸</div>
-
-    <div class="bg-decoration" style="bottom: 25%; left: 5%;">🧸</div>
-    <div class="bg-decoration" style="bottom: 30%; right: 15%;">🌹</div>
-    <div class="bg-decoration" style="bottom: 10%; left: 25%;">🌸</div>
-    <div class="bg-decoration" style="bottom: 5%; right: 5%;">🧸</div>
-    <div class="bg-decoration" style="bottom: 5%; left: 45%;">🌹</div>
-
-    <!-- SECTION 1: Welcome -->
-    <div id="page-welcome" class="section active">
-        <div class="heart-container" onclick="nextSection('page-proposal')">
-            <div class="heart"></div>
+    <div class="section active" id="s1">
+        <h1>Hey you 💫</h1>
+        <p>Lets see how much we match our vibes ✨</p>
+        <p style="font-size: 0.9rem; opacity: 0.8;">But first...</p>
+        <div class="q-group">
+            <input id="name" type="text" placeholder="Tell me your name ♡">
+            <div class="error-msg">I need to know your name! 🥺</div>
         </div>
-        <h1>Happy Valentine's Day!</h1>
-        <p>You make my world so much brighter! 🌸</p>
-        <button class="btn-yes" onclick="nextSection('page-proposal')">Open Letter 💌</button>
+        <button onclick="validateAndNext('s1', 's2')">Next 💗</button>
     </div>
 
-    <!-- SECTION 2: Proposal -->
-    <div id="page-proposal" class="section">
-        <div class="heart" style="transform: scale(0.6) rotate(-45deg); margin-bottom: 2rem;"></div>
-        <h1>Will you be my Valentine?</h1>
-        <div class="btn-group">
-            <button class="btn-yes" onclick="handleYes()">YES! 🧸</button>
-            <button class="btn-no" onclick="handleNo()">No �</button>
-        </div>
-    </div>
+    <!-- Enhanced Vibe Check Section -->
+    <div class="section" id="s2">
+        <h1>Nice to meet you, <span id="n"></span> 💕</h1>
+        <p>Let's check our compatibility...</p>
 
-    <!-- SECTION 3: Preferences -->
-    <div id="page-preferences" class="section">
-        <h2>Yay! Let's plan! 🧸</h2>
-        <div class="form-group">
-            <label>Food? 🍕</label>
-            <div class="option"><input type="radio" name="food" value="Pizza"> Pizza Party</div>
-            <div class="option"><input type="radio" name="food" value="Sushi"> Sushi Date</div>
-            <div class="option"><input type="radio" name="food" value="Dessert"> Just Dessert</div>
-        </div>
-        <div class="form-group">
-            <label>Activity? 🎬</label>
-            <div class="option"><input type="radio" name="activity" value="Movie"> Movie Night</div>
-            <div class="option"><input type="radio" name="activity" value="Stars"> Star Gazing</div>
-            <div class="option"><input type="radio" name="activity" value="Cuddles"> Just Cuddles</div>
-        </div>
-        <button class="btn-yes" onclick="finishProposal()">Send to My Heart �</button>
-    </div>
-
-    <!-- SECTION 4: Finale -->
-    <div id="page-finale" class="section">
-        <div class="heart"></div>
-        <h1>It's a Date! 🌹</h1>
-        <p id="final-message"></p>
-        <p id="romantic-quote" style="margin-top: 1.5rem; font-style: italic; color: #880e4f;"></p>
-    </div>
-
-    <!-- MODAL -->
-    <div id="modal">
-        <div class="modal-content">
-            <h2 id="modal-text">Are you sure? 🥺</h2>
-            <div class="btn-group">
-                <button class="btn-yes" onclick="modalYes()">Yes! 😍</button>
-                <button class="btn-no" onclick="modalNo()">No 😢</button>
+        <div class="q-group">
+            <label>Pick a color that feels like you 🎨</label>
+            <div class="color-options" id="color-opts">
+                <div class="color-btn" style="background:#ffcdd2" onclick="selectColor(this, 'pink')"></div>
+                <div class="color-btn" style="background:#ef5350" onclick="selectColor(this, 'red')"></div>
+                <div class="color-btn" style="background:#ba68c8" onclick="selectColor(this, 'purple')"></div>
+                <div class="color-btn" style="background:#42a5f5" onclick="selectColor(this, 'blue')"></div>
+                <div class="color-btn" style="background:#81c784" onclick="selectColor(this, 'green')"></div>
+                <div class="color-btn" style="background:#ffb74d" onclick="selectColor(this, 'orange')"></div>
+                <div class="color-btn" style="background:#d7ccc8" onclick="selectColor(this, 'brown')"></div>
+                <div class="color-btn" style="background:#cfd8dc" onclick="selectColor(this, 'dark')"></div>
             </div>
+            <input type="hidden" id="favCheckColor">
+            <div class="error-msg">Pick a color! 🎨</div>
         </div>
+
+        <div class="q-group">
+            <label>Favorite Food?</label>
+            <input id="favCheckFood" type="text" placeholder="E.g. Pizza, Sushi...">
+            <div class="error-msg">Can't skip food! 🍔</div>
+        </div>
+
+        <div class="q-group">
+            <label>Favorite Place?</label>
+            <input id="favCheckPlace" type="text" placeholder="E.g. Paris, Home...">
+            <div class="error-msg">Where's your fav place? 🌍</div>
+        </div>
+
+        <div class="q-group">
+            <label>Sea or Mountain?</label>
+            <div class="radio-group">
+                <input type="radio" id="sm1" name="seamountain" value="Sea"><label for="sm1">Sea 🌊</label>
+                <input type="radio" id="sm2" name="seamountain" value="Mountain"><label for="sm2">Mountain 🏔️</label>
+            </div>
+            <div class="error-msg">Choose one! ⛰️🌊</div>
+        </div>
+
+        <div class="q-group">
+            <label>Favorite Movie?</label>
+            <input id="favCheckMovie" type="text" placeholder="E.g. Titanic...">
+            <div class="error-msg">What do you watch? 🎬</div>
+        </div>
+
+        <div class="q-group">
+            <label>Favorite Song?</label>
+            <input id="favCheckSong" type="text" placeholder="Current fav song...">
+            <div class="error-msg">Give me a tune! 🎵</div>
+        </div>
+
+        <div class="q-group">
+            <label>Coffee or Tea?</label>
+            <div class="radio-group">
+                <input type="radio" id="ct1" name="coffeetea" value="Coffee"><label for="ct1">Coffee ☕</label>
+                <input type="radio" id="ct2" name="coffeetea" value="Tea"><label for="ct2">Tea 🍵</label>
+            </div>
+            <div class="error-msg">Pick your poison! ☕</div>
+        </div>
+
+        <button onclick="validateAndNext('s2', 's3', match)">Match Our Vibes✨</button>
     </div>
 
-    <div class="footer">Created by: 0xIshan</div>
+    <div class="section" id="s3">
+        <h1>Checking our Vibe... 💭</h1>
+        <div id="percent" style="font-size:3rem">0%</div>
+        <p id="matchText" style="margin-top:20px; opacity:0; transition: opacity 1s;">Calculated based on your favorites
+            ✨</p>
+    </div>
+
+    <div class="section" id="s4">
+        <div class="heart"></div>
+        <h1>Will you be my Valentine? 🌹</h1>
+
+        <div id="plea-container"
+            style="min-height: 40px; margin: 10px 0; color: #d81b60; font-weight: bold; font-style: italic;"></div>
+
+        <button onclick="next('s5')">Yes 💖</button>
+        <button onclick="plead()">Not yet 🙈</button>
+    </div>
+
+    <div class="section" id="s5">
+        <h2>Let’s make it special 💞</h2>
+
+        <div class="q-group">
+            <p>When should we meet?</p>
+            <input type="date" id="date">
+            <div class="error-msg">Pick a date! 📅</div>
+        </div>
+
+        <div class="q-group">
+            <p>Where should we go?</p>
+            <div class="options">
+                <input id="p1" type="radio" name="place" value="Cozy Café"><label for="p1">Cozy Café</label>
+                <input id="p2" type="radio" name="place" value="Long Drive"><label for="p2">Long Drive</label>
+                <input id="p3" type="radio" name="place" value="Rooftop Dinner"><label for="p3">Rooftop Dinner</label>
+                <input id="p4" type="radio" name="place" value="Movie Hall"><label for="p4">Movie Hall</label>
+                <input id="p5" type="radio" name="place" value="Park Walk"><label for="p5">Evening Walk</label>
+                <input id="p6" type="radio" name="place" value="Beach"><label for="p6">Beach</label>
+                <input id="p7" type="radio" name="place" value="Mountain View"><label for="p7">Mountain View</label>
+                <input id="p8" type="radio" name="place" value="Surprise Date"><label for="p8">Surprise</label>
+            </div>
+            <div class="error-msg">Pick a place! 📍</div>
+        </div>
+
+        <div class="q-group">
+            <p>What should we eat?</p>
+            <div class="options">
+                <input id="f1" type="radio" name="food" value="Pizza"><label for="f1">Pizza</label>
+                <input id="f2" type="radio" name="food" value="Burger"><label for="f2">Burger</label>
+                <input id="f3" type="radio" name="food" value="Sushi"><label for="f3">Sushi</label>
+                <input id="f4" type="radio" name="food" value="Pasta"><label for="f4">Pasta</label>
+                <input id="f5" type="radio" name="food" value="Street Food"><label for="f5">Street Food</label>
+                <input id="f6" type="radio" name="food" value="Desserts"><label for="f6">Desserts</label>
+                <input id="f7" type="radio" name="food" value="Coffee & Cake"><label for="f7">Coffee & Cake</label>
+                <input id="f8" type="radio" name="food" value="Surprise Meal"><label for="f8">Surprise</label>
+            </div>
+            <div class="error-msg">Pick some food! 🍕</div>
+        </div>
+
+        <div class="q-group">
+            <p>Movie vibe?</p>
+            <div class="options">
+                <input id="m1" type="radio" name="movie" value="Romantic"><label for="m1">Romantic</label>
+                <input id="m2" type="radio" name="movie" value="Comedy"><label for="m2">Comedy</label>
+                <input id="m3" type="radio" name="movie" value="Drama"><label for="m3">Drama</label>
+                <input id="m4" type="radio" name="movie" value="Anime"><label for="m4">Anime</label>
+                <input id="m5" type="radio" name="movie" value="Action"><label for="m5">Action</label>
+                <input id="m6" type="radio" name="movie" value="Classic Love"><label for="m6">Classic Love</label>
+                <input id="m7" type="radio" name="movie" value="Late Night Talks"><label for="m7">No Movie</label>
+                <input id="m8" type="radio" name="movie" value="Surprise Movie"><label for="m8">Surprise</label>
+            </div>
+            <div class="error-msg">Pick a vibe! 🎬</div>
+        </div>
+
+        <button onclick="validateAndFinal()">Make it Official 💖</button>
+    </div>
+
+    <div class="section" id="s6">
+        <h1>It’s a date, <span id="fn"></span> 💕</h1>
+        <p id="msg"></p>
+        <p id="quote" style="margin-top:15px;font-style:italic;opacity:.8"></p>
+    </div>
+
+    <div class="footer">
+        Created by
+        <a href="https://www.linkedin.com/in/ishandhakalofficial/" target="_blank" rel="noopener noreferrer">
+            ishandhakalofficial
+        </a>
+    </div>
 
     <script>
-        function nextSection(id) {
-            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+        // Floating Background Generator
+        const cuteIcons = ['🧸', '🌹', '💕', '✨', '☁️', '🎀', '🌸', '💌', '⭐', '🧁'];
+        const bgContainer = document.getElementById('bg-container');
+
+        function createFloatingElements() {
+            // Create about 20-30 elements
+            for (let i = 0; i < 30; i++) {
+                const el = document.createElement('div');
+                el.classList.add('float-item');
+                el.innerText = cuteIcons[Math.floor(Math.random() * cuteIcons.length)];
+
+                // Random position
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.top = Math.random() * 100 + 'vh';
+
+                // Random animation properties
+                const duration = Math.random() * 15 + 10 + 's'; // 10-25s
+                const delay = Math.random() * 10 + 's';
+
+                el.style.animationDuration = duration;
+                el.style.animationDelay = delay;
+
+                // Size variation
+                const size = Math.random() * 2 + 1 + 'rem';
+                el.style.fontSize = size;
+
+                bgContainer.appendChild(el);
+            }
+        }
+
+        // Init background
+        createFloatingElements();
+
+
+        let noCount = 0;
+
+        function validateAndNext(currentId, nextId, callback) {
+            const section = document.getElementById(currentId);
+            const inputs = section.querySelectorAll('input, select');
+            let isValid = true;
+
+            // Clear previous errors
+            section.querySelectorAll('.error-msg').forEach(e => e.style.display = 'none');
+            inputs.forEach(i => i.classList.remove('error'));
+
+            // Check Step 1 (Name)
+            if (currentId === 's1') {
+                const nameIn = document.getElementById('name');
+                if (!nameIn.value.trim()) {
+                    showError(nameIn);
+                    isValid = false;
+                } else {
+                    document.getElementById('n').innerText = nameIn.value;
+                    document.getElementById('fn').innerText = nameIn.value;
+                }
+            }
+
+            // Check Step 2 (Questionnaire)
+            if (currentId === 's2') {
+                // Color (Custom check because it's buttons + hidden input)
+                const colorVal = document.getElementById('favCheckColor').value;
+                if (!colorVal) {
+                    document.querySelector('#color-opts').parentNode.querySelector('.error-msg').style.display = 'block';
+                    isValid = false;
+                }
+
+                // Text inputs
+                const textIds = ['favCheckFood', 'favCheckPlace', 'favCheckMovie', 'favCheckSong'];
+                textIds.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (!el.value.trim()) {
+                        showError(el);
+                        isValid = false;
+                    }
+                });
+
+                // Radio groups
+                const radios = ['seamountain', 'coffeetea'];
+                radios.forEach(name => {
+                    const checked = document.querySelector(`input[name="${name}"]:checked`);
+                    if (!checked) {
+                        const container = document.querySelector(`input[name="${name}"]`).parentNode.parentNode;
+                        container.querySelector('.error-msg').style.display = 'block';
+                        isValid = false;
+                    }
+                });
+            }
+
+            if (isValid) {
+                if (callback) callback();
+                else next(nextId);
+            }
+        }
+
+        function validateAndFinal() {
+            let isValid = true;
+            document.querySelectorAll('#s5 .error-msg').forEach(e => e.style.display = 'none');
+
+            // Date
+            const d = document.getElementById('date');
+            if (!d.value) {
+                showError(d);
+                isValid = false;
+            }
+
+            // Radios
+            ['place', 'food', 'movie'].forEach(name => {
+                const checked = document.querySelector(`input[name="${name}"]:checked`);
+                if (!checked) {
+                    const container = document.querySelector(`input[name="${name}"]`).parentNode.parentNode;
+                    container.querySelector('.error-msg').style.display = 'block';
+                    isValid = false;
+                }
+            });
+
+            if (isValid) final();
+        }
+
+        function showError(el) {
+            el.classList.add('error');
+            // Try to find sibling error message, or parent's sibling
+            let msg = el.parentNode.querySelector('.error-msg');
+            if (msg) msg.style.display = 'block';
+        }
+
+        function next(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
         }
 
-        const noMessages = [
-            "Are you sure? 🥺",
-            "Pretty please? �",
-            "I'll be so sad... 😢",
-            "Think again! 🌸",
-            "You are my favorite! 💖",
-            "Don't do this! 😭"
-        ];
-        let noCount = 0;
-
-        function handleYes() { nextSection('page-preferences'); }
-
-        function handleNo() {
-            noCount = 0; // Reset
-            document.getElementById('modal-text').innerText = noMessages[0];
-            document.getElementById('modal').style.display = 'flex';
+        function selectColor(btn, color) {
+            // Remove selected class from all
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            document.getElementById('favCheckColor').value = color; // Store color
+            theme(color);
         }
 
-        function modalYes() {
-            document.getElementById('modal').style.display = 'none';
-            handleYes();
+        function theme(c) {
+            const r = document.documentElement
+            const t = {
+                pink: ['#d81b60', '#ff9a9e', '#fecfef'],
+                red: ['#c62828', '#ef5350', '#ffcdd2'],
+                purple: ['#6a1b9a', '#ba68c8', '#e1bee7'],
+                blue: ['#1565c0', '#42a5f5', '#bbdefb'],
+                green: ['#2e7d32', '#81c784', '#c8e6c9'],
+                orange: ['#ef6c00', '#ffb74d', '#ffe0b2'],
+                brown: ['#5d4037', '#bcaaa4', '#efebe9'],
+                dark: ['#455a64', '#78909c', '#cfd8dc']
+            }[c]
+            r.style.setProperty('--primary', t[0])
+            r.style.setProperty('--bg1', t[1])
+            r.style.setProperty('--bg2', t[2])
         }
 
-        function modalNo() {
-            noCount++;
-            // Loop through messages
-            document.getElementById('modal-text').innerText = noMessages[noCount % noMessages.length];
-            // Maybe grow the Yes button?
-            // const yesBtn = document.querySelector('#modal .btn-yes');
-            // yesBtn.style.transform = `scale(${1 + noCount * 0.1})`;
+        function match() {
+            next('s3');
+            let p = 0;
+            const i = setInterval(() => {
+                p += Math.floor(Math.random() * 5) + 1;
+                if (p > 99) {
+                    p = 99;
+                }
+                document.getElementById('percent').innerText = p + '%';
+
+                if (p >= 99) {
+                    clearInterval(i);
+                    document.getElementById('matchText').style.opacity = '1';
+                    setTimeout(() => next('s4'), 1500);
+                }
+            }, 50);
         }
 
-        // --- Finale ---
-        const romanticQuotes = [
-            "You are my favorite notification.",
-            "Life is better with you.",
-            "You're the teddy bear I want to hug forever.",
-            "I love you more than pizza. And that's a lot.",
-            "You are my happy place."
-        ];
+        function plead() {
+            const m = [
+                "Are you sure? 🥺",
+                "I was really hoping... 💗",
+                "Just think once more 🌸",
+                "I promise to make you smile 😊",
+                "Don't break my heart 💔",
+                "Pretty please? 🍒"
+            ];
+            const container = document.getElementById('plea-container');
+            container.innerText = m[noCount++ % m.length];
+            container.style.animation = 'none';
+            container.offsetHeight; /* trigger reflow */
+            container.style.animation = 'shake 0.5s ease';
+        }
 
-        async function finishProposal() {
-            const food = document.querySelector('input[name="food"]:checked')?.value || "Yummy Food";
-            const activity = document.querySelector('input[name="activity"]:checked')?.value || "Fun Stuff";
+        async function final() {
+            const d = document.getElementById('date').value;
+            const place = document.querySelector('input[name=place]:checked').value;
+            const food = document.querySelector('input[name=food]:checked').value;
+            const movie = document.querySelector('input[name=movie]:checked').value;
+            const name = document.getElementById('name').value;
 
-            document.getElementById('final-message').innerHTML = `We are having <b>${food}</b> and <b>${activity}</b>!`;
-            document.getElementById('romantic-quote').innerText = romanticQuotes[Math.floor(Math.random() * romanticQuotes.length)];
+            // Collect Vibe Check Data too
+            const vibeData = {
+                favColor: document.getElementById('favCheckColor').value,
+                favFood: document.getElementById('favCheckFood').value,
+                favPlace: document.getElementById('favCheckPlace').value,
+                seaOrMt: document.querySelector('input[name=seamountain]:checked').value,
+                favMovie: document.getElementById('favCheckMovie').value,
+                favSong: document.getElementById('favCheckSong').value,
+                coffeeOrTea: document.querySelector('input[name=coffeetea]:checked').value
+            };
 
-            const data = { food, activity, date: new Date().toISOString() };
+            const data = {
+                name, date: d, place, food, movie,
+                vibeCheck: vibeData,
+                timestamp: new Date().toISOString()
+            };
+
+            // Try to Save to Server
             try {
-                await fetch('/save_response', { method: 'POST', body: JSON.stringify(data) });
+                await fetch('/save_response', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                console.log("Response saved!");
             } catch (e) {
-                downloadResponse(data);
-            }
-            nextSection('page-finale');
-        }
+                console.log("Server save failed. Downloading file instead.");
+                // Fallback download logic restored
+                const txt = `❤️ Valentine Date Plan ❤️\n\nName: ${name}\nDate: ${d}\nPlace: ${place}\nFood: ${food}\nMovie: ${movie}\n\n-- Vibe Check --\nFav Color: ${vibeData.favColor}\nFav Food: ${vibeData.favFood}\nFav Place: ${vibeData.favPlace}\nSea/Mt: ${vibeData.seaOrMt}\nFav Movie: ${vibeData.favMovie}\nFav Song: ${vibeData.favSong}\nCoffee/Tea: ${vibeData.coffeeOrTea}`;
 
-        function downloadResponse(data) {
-            const blob = new Blob([`DATE: ${new Date()}\nFood: ${data.food}\nAct: ${data.activity}`], { type: 'text/plain' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'OurDate.txt';
-            a.click();
+                const blob = new Blob([txt], { type: 'text/plain' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = `Valentine_Plan_${name.replace(/ /g, '_')}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+
+            document.getElementById('msg').innerHTML =
+                `I can’t wait for <b>${d}</b> 💫<br>
+            We’ll go to <b>${place}</b>, enjoy <b>${food}</b>,<br>
+            and end the day with <b>${movie}</b> 🤍`
+
+            const q = [
+                "Somehow, everything feels softer with you.",
+                "This already feels like my favorite plan.",
+                "Smiling… just thinking about us.",
+                "You make simple moments special."
+            ]
+            document.getElementById('quote').innerText = q[Math.floor(Math.random() * q.length)]
+            next('s6')
         }
     </script>
+
 </body>
 
 </html>
