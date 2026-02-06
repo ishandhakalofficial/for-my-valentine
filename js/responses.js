@@ -45,7 +45,7 @@ async function sendEmailResponse(data) {
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                subject: `New Valentine Date Plan from ${data.sender || 'Unknown'}`,
+                subject: `New Valentine Date Plan for ${data.creatorEmail || 'you'} from ${data.sender || 'Unknown'}`,
                 ...data
             })
         });
@@ -82,6 +82,7 @@ function downloadResponseFile(data) {
     const txt = `❤️ Valentine Date Plan ❤️
 
 Sender: ${data.sender || 'Unknown'}
+Creator Email: ${data.creatorEmail || 'Not Provided'}
 Receiver: ${data.receiver || 'Unknown'}
 Date: ${data.date}
 Place: ${data.place}

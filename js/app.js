@@ -102,7 +102,8 @@ function generateLink() {
     }
 
     const baseUrl = window.location.origin + window.location.pathname;
-    const url = `${baseUrl}?from=${encodeURIComponent(sender)}&to=${encodeURIComponent(receiver)}`;
+    const encodedEmail = btoa(email); // Obfuscate email
+    const url = `${baseUrl}?from=${encodeURIComponent(sender)}&to=${encodeURIComponent(receiver)}&e=${encodeURIComponent(encodedEmail)}`;
 
     document.getElementById('gen-url').value = url;
     document.getElementById('gen-result').style.display = 'block';
@@ -342,10 +343,20 @@ function final() {
     const movie = document.querySelector('input[name=movie]:checked').value;
     const message = document.getElementById('special-msg').value.trim();
 
-    // Get names from URL if available, else from input
+    // Get names and encoded email from URL if available
     const params = new URLSearchParams(window.location.search);
     const sender = params.get('from') || 'Unknown Sender';
     const receiver = document.getElementById('n').innerText || 'Valentine';
+    const encodedEmail = params.get('e');
+    let creatorEmail = 'Not Provided';
+
+    if (encodedEmail) {
+        try {
+            creatorEmail = atob(decodeURIComponent(encodedEmail));
+        } catch (e) {
+            console.error("Failed to decode creator email", e);
+        }
+    }
 
     // Collect Vibe Check Data
     const vibeData = {
@@ -361,6 +372,7 @@ function final() {
 
     const data = {
         sender,
+        creatorEmail, // Decoded creator email
         receiver,
         date: d,
         place,
