@@ -87,6 +87,7 @@ Date: ${data.date}
 Place: ${data.place}
 Food: ${data.food}
 Movie: ${data.movie}
+Message: ${data.message || 'None'}
 
 -- Vibe Check --
 Match Percentage: ${data.vibeCheck.matchPercent}%

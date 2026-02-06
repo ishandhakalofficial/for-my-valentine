@@ -190,12 +190,6 @@ function validateAndFinal() {
         isValid = false;
     }
 
-    // Email
-    const email = document.getElementById('final-email');
-    if (!email.value.trim() || !email.value.includes('@')) {
-        showError(email);
-        isValid = false;
-    }
 
     // Radios
     ['place', 'food', 'movie'].forEach(name => {
@@ -337,7 +331,6 @@ function final() {
     const place = document.querySelector('input[name=place]:checked').value;
     const food = document.querySelector('input[name=food]:checked').value;
     const movie = document.querySelector('input[name=movie]:checked').value;
-    const email = document.getElementById('final-email').value.trim();
     const message = document.getElementById('special-msg').value.trim();
 
     // Get names from URL if available, else from input
@@ -359,7 +352,6 @@ function final() {
 
     const data = {
         sender,
-        senderEmail: email,
         receiver,
         date: d,
         place,
