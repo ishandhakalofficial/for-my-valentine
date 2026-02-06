@@ -18,10 +18,10 @@ A fun and cute Valentine’s Day project with:
 ```
 for-my-valentine/
 │
-├── index.html          # Your main project (all logic inside)
-├── README.md           # Project description
-├── LICENSE             # Copyright & usage rights
-├── .gitignore          # Ignore unnecessary files
-├── CONTRIBUTING.md     # (Optional but professional)
-└── CODE_OF_CONDUCT.md  # (Optional but nice)
+├── index.html
+├── README.md
+├── LICENSE
+├── .gitignore
+├── CONTRIBUTING.md  
+└── CODE_OF_CONDUCT.md
 ```
