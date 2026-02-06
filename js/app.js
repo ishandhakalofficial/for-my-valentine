@@ -72,9 +72,17 @@ const DOMPurify = window.DOMPurify || {
 function generateLink() {
     const sender = document.getElementById('gen-sender').value.trim();
     const receiver = document.getElementById('gen-receiver').value.trim();
+    const errorMsg = document.getElementById('gen-error');
+
+    // Reset error
+    errorMsg.style.display = 'none';
+    document.getElementById('gen-sender').classList.remove('error');
+    document.getElementById('gen-receiver').classList.remove('error');
 
     if (!sender || !receiver) {
-        alert("Please enter both names! 🥺");
+        errorMsg.style.display = 'block';
+        if (!sender) document.getElementById('gen-sender').classList.add('error');
+        if (!receiver) document.getElementById('gen-receiver').classList.add('error');
         return;
     }
 
