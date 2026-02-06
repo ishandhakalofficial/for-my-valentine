@@ -1,3 +1,9 @@
+<!--
+  Project: For My Valentine 💝
+  Author: Ishan Dhakal
+  Created: 2026
+  License: MIT
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -531,12 +537,10 @@
         <p id="quote" style="margin-top:15px;font-style:italic;opacity:.8"></p>
     </div>
 
-    <div class="footer">
-        Created by
-        <a href="https://www.linkedin.com/in/ishandhakalofficial/" target="_blank" rel="noopener noreferrer">
-            ishandhakalofficial
-        </a>
-    </div>
+    <footer
+        style="text-align:center; margin-top:40px; font-size:14px; color:#777; position:fixed; bottom:10px; width:100%;">
+        © 2026 Ishan Dhakal. All rights reserved.
+    </footer>
 
     <script>
         // Floating Background Generator
@@ -696,15 +700,35 @@
 
         function match() {
             next('s3');
+
+            // Get Name & First Letter
+            const name = document.getElementById('name').value.trim().toUpperCase();
+            const firstChar = name.charAt(0);
+
+            // Alphabet Mapping
+            const vibeMap = {
+                'A': 99, 'B': 97, 'C': 96, 'D': 95, 'E': 94,
+                'F': 93, 'G': 92, 'H': 91, 'I': 90, 'J': 89,
+                'K': 88, 'L': 87, 'M': 98, 'N': 86, 'O': 85,
+                'P': 84, 'Q': 83, 'R': 82, 'S': 88, 'T': 81,
+                'U': 80, 'V': 79, 'W': 78, 'X': 77, 'Y': 76, 'Z': 75
+            };
+
+            // Default to 85% if not a letter or empty
+            let targetPercent = vibeMap[firstChar] || 85;
+
             let p = 0;
             const i = setInterval(() => {
+                // Increment faster at start, slower at end
                 p += Math.floor(Math.random() * 5) + 1;
-                if (p > 99) {
-                    p = 99;
+
+                if (p > targetPercent) {
+                    p = targetPercent;
                 }
+
                 document.getElementById('percent').innerText = p + '%';
 
-                if (p >= 99) {
+                if (p >= targetPercent) {
                     clearInterval(i);
                     document.getElementById('matchText').style.opacity = '1';
                     setTimeout(() => next('s4'), 1500);
@@ -719,7 +743,26 @@
                 "Just think once more 🌸",
                 "I promise to make you smile 😊",
                 "Don't break my heart 💔",
-                "Pretty please? 🍒"
+                "Pretty please? 🍒",
+                "What if this is our love story? 💌",
+                "I’ll bring snacks AND love 😋❤️",
+                "Just one tiny yes? 🫶",
+                "My heart says yes already 💓",
+                "Even the stars ship us ✨",
+                "I practiced this moment 😭",
+                "This button is getting shy 🙈",
+                "I asked my heart, it said you 💘",
+                "Cute warning: feelings involved 🚨",
+                "Don’t let this moment pass 🌷",
+                "Imagine the memories we’ll make 📸",
+                "My heart refreshed for your answer 🔄❤️",
+                "This yes could be iconic 💅💖",
+                "Say yes for romance stats 📊💕",
+                "This is your sign 🪄",
+                "Soft yes energy activated 🌈",
+                "Loading happiness… 92% 💕",
+                "I won’t ask again (maybe 👀)",
+                "Heart.exe is waiting ❤️‍🔥"
             ];
             const container = document.getElementById('plea-container');
             container.innerText = m[noCount++ % m.length];
@@ -783,7 +826,28 @@
                 "Somehow, everything feels softer with you.",
                 "This already feels like my favorite plan.",
                 "Smiling… just thinking about us.",
-                "You make simple moments special."
+                "You make simple moments special.",
+                "Being with you feels easy.",
+                "This feels calm, warm, and right.",
+                "I like who I am around you.",
+                "Every moment feels a little brighter.",
+                "Time slows down when it’s us.",
+                "I didn’t expect this… but I love it.",
+                "Your presence feels like comfort.",
+                "This feels like a quiet kind of happiness.",
+                "It’s the small things with you.",
+                "I’m happy right here, right now.",
+                "You feel like home in a moment.",
+                "I smile without realizing it.",
+                "This feels natural… like it was meant to happen.",
+                "You make ordinary days feel meaningful.",
+                "There’s something peaceful about us.",
+                "I wouldn’t rush this feeling.",
+                "It’s nice… feeling this way with you.",
+                "I like how this feels—soft and real.",
+                "Even silence feels good with you.",
+                "This moment feels safe.",
+                "Being close to you just feels right."
             ]
             document.getElementById('quote').innerText = q[Math.floor(Math.random() * q.length)]
             next('s6')

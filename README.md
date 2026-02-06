@@ -1,0 +1,27 @@
+# 💘 For My Valentine
+
+A fun and cute Valentine’s Day project with:
+- Funny Valentine questions
+- A date fixer / date selector
+- Clean, simple UI made with pure HTML
+
+## 🌸 Live Demo
+👉 https://ishandhakalofficial.github.io/for-my-valentine/
+
+## 🛠 Tech Used
+- HTML
+- CSS (inline / internal)
+- JavaScript (inside HTML)
+
+## 📂 Project Structure
+
+```
+for-my-valentine/
+│
+├── index.html          # Your main project (all logic inside)
+├── README.md           # Project description
+├── LICENSE             # Copyright & usage rights
+├── .gitignore          # Ignore unnecessary files
+├── CONTRIBUTING.md     # (Optional but professional)
+└── CODE_OF_CONDUCT.md  # (Optional but nice)
+```
