@@ -538,8 +538,9 @@
     </div>
 
     <footer
-        style="text-align:center; margin-top:40px; font-size:14px; color:#777; position:fixed; bottom:10px; width:100%;">
-        © 2026 Ishan Dhakal. All rights reserved.
+        style="text-align:center; position:fixed; bottom:0; width:100%; padding:10px 0; background:rgba(255,255,255,0.7); backdrop-filter:blur(5px); font-size:14px; font-weight:bold; color:#d81b60; z-index:100;">
+        Created By: <a href="https://www.linkedin.com/in/ishandhakalofficial/" target="_blank"
+            style="color: inherit; text-decoration: none;">@ishandhakalofficial</a> | © 2026 All rights reserved.
     </footer>
 
     <script>
@@ -731,7 +732,7 @@
                 if (p >= targetPercent) {
                     clearInterval(i);
                     document.getElementById('matchText').style.opacity = '1';
-                    setTimeout(() => next('s4'), 1500);
+                    setTimeout(() => next('s4'), 5000);
                 }
             }, 50);
         }
