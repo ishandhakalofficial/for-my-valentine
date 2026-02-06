@@ -361,6 +361,38 @@
             font-weight: bold;
         }
 
+        .info-btn {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 5px 15px;
+            font-size: 0.85rem;
+            margin-top: 15px;
+            opacity: 0.8;
+            box-shadow: none;
+        }
+
+        .info-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 15px;
+            text-align: left;
+            font-size: 0.85rem;
+            animation: fade 0.3s ease;
+        }
+
+        .info-section h3 {
+            font-size: 1rem;
+            margin: 10px 0 5px 0;
+        }
+
+        .info-section ul {
+            padding-left: 20px;
+            margin: 5px 0;
+        }
+
         .footer {
             text-align: center;
             width: 100%;
@@ -407,6 +439,27 @@
             <button onclick="next('s1')"
                 style="background:transparent; border:2px solid var(--primary); color:var(--primary); margin-top:10px;">Skip
                 (Just Demo) ⏩</button>
+
+            <br>
+            <button class="info-btn" onclick="toggleInfo()">How it works & Privacy ℹ️</button>
+
+            <div id="info-block" class="info-section">
+                <h3>📖 User Manual</h3>
+                <ul>
+                    <li><b>Fill Details:</b> Enter your name, your valentine's name, and your email.</li>
+                    <li><b>Generate:</b> Click "Generate Link" to create a unique URL.</li>
+                    <li><b>Share:</b> Copy the link and send it to your special someone.</li>
+                    <li><b>Get Notified:</b> When they respond, you'll receive an email and can download the plan!</li>
+                </ul>
+
+                <h3>🔒 Privacy Policy</h3>
+                <p>
+                    This is a statically hosted project. We don't have a backend database.
+                    Your names are only stored within the URL you share.
+                    Responses are sent directly to the email you provide via Formspree.
+                    A copy is saved in your own browser's local storage for your reference.
+                </p>
+            </div>
         </div>
 
         <div class="section" id="s1">

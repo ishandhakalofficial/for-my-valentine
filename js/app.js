@@ -117,6 +117,15 @@ function copyLink() {
         .catch(() => alert("Failed to copy. Please copy manually."));
 }
 
+function toggleInfo() {
+    const info = document.getElementById('info-block');
+    if (info.style.display === 'block') {
+        info.style.display = 'none';
+    } else {
+        info.style.display = 'block';
+    }
+}
+
 
 // --- Navigation & Validation ---
 
