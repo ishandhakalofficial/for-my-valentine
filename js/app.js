@@ -72,17 +72,32 @@ const DOMPurify = window.DOMPurify || {
 function generateLink() {
     const sender = document.getElementById('gen-sender').value.trim();
     const receiver = document.getElementById('gen-receiver').value.trim();
+    const email = document.getElementById('gen-email').value.trim();
     const errorMsg = document.getElementById('gen-error');
 
     // Reset error
     errorMsg.style.display = 'none';
     document.getElementById('gen-sender').classList.remove('error');
     document.getElementById('gen-receiver').classList.remove('error');
+    document.getElementById('gen-email').classList.remove('error');
 
-    if (!sender || !receiver) {
+    if (!sender || !receiver || !email) {
         errorMsg.style.display = 'block';
         if (!sender) document.getElementById('gen-sender').classList.add('error');
         if (!receiver) document.getElementById('gen-receiver').classList.add('error');
+        if (!email) {
+            document.getElementById('gen-email').classList.add('error');
+            errorMsg.innerText = "Please fill in all fields! 🥺";
+        } else {
+            errorMsg.innerText = "Please enter both names! 🥺";
+        }
+        return;
+    }
+
+    if (!email.includes('@')) {
+        errorMsg.style.display = 'block';
+        document.getElementById('gen-email').classList.add('error');
+        errorMsg.innerText = "Please enter a valid email! 📧";
         return;
     }
 
