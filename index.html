@@ -45,9 +45,17 @@
             animation: bg 18s ease infinite;
             color: var(--primary);
             text-align: center;
-            overflow: hidden;
-            /* Prevent scrollbars from floating elements */
             position: relative;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            position: relative;
+            padding: 20px 0;
         }
 
         @keyframes bg {
@@ -354,223 +362,220 @@
         }
 
         .footer {
-            position: fixed;
-            bottom: 10px;
-            font-size: .8rem;
-            opacity: .6;
-            pointer-events: auto;
-            /* Allow clicking links */
-            z-index: 5;
-        }
-
-        .footer a {
-            color: inherit;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
+            text-align: center;
+            width: 100%;
+            padding: 15px 0;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            font-size: 14px;
+            font-weight: bold;
+            color: #d81b60;
+            z-index: 100;
+            position: relative;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="floating-bg" id="bg-container"></div>
+    <main class="main-container">
+        <div class="floating-bg" id="bg-container"></div>
 
-    <div class="section active" id="s0">
-        <h1>Create Your Valentine Link 💌</h1>
-        <p>Make it special for them!</p>
+        <div class="section active" id="s0">
+            <h1>Create Your Valentine Link 💌</h1>
+            <p>Make it special for them!</p>
 
-        <div class="q-group">
-            <input id="gen-sender" type="text" placeholder="Your Name">
-            <input id="gen-receiver" type="text" placeholder="Their Name" style="margin-top:10px;">
-            <input id="gen-email" type="text" placeholder="Your Email (To notify you! 📧)" style="margin-top:10px;">
-            <div class="error-msg" id="gen-error" style="display:none;">Please enter both names! 🥺</div>
-        </div>
-
-        <div id="gen-result"
-            style="display:none; margin:15px 0; padding:15px; background:rgba(255,255,255,0.8); border-radius:15px;">
-            <p style="font-size:0.9rem; margin-bottom:5px;">Send this link:</p>
-            <input type="text" id="gen-url" readonly style="font-size:0.8rem; width:90%; padding:8px;"
-                onclick="this.select()">
-            <button onclick="copyLink()" style="margin-top:10px; padding:8px 20px; font-size:0.9rem;">Copy 📋</button>
-        </div>
-
-        <button onclick="generateLink()">Generate Link ✨</button>
-        <br>
-        <button onclick="next('s1')"
-            style="background:transparent; border:2px solid var(--primary); color:var(--primary); margin-top:10px;">Skip
-            (Just Demo) ⏩</button>
-    </div>
-
-    <div class="section" id="s1">
-        <h1>Hey you 💫</h1>
-        <p>Lets see how much we match our vibes ✨</p>
-        <p style="font-size: 0.9rem; opacity: 0.8;">But first...</p>
-        <div class="q-group">
-            <input id="name" type="text" placeholder="Tell me your name ♡">
-            <div class="error-msg">I need to know your name! 🥺</div>
-        </div>
-        <button onclick="validateAndNext('s1', 's2')">Next 💗</button>
-    </div>
-
-    <!-- Enhanced Vibe Check Section -->
-    <div class="section" id="s2">
-        <h1>Nice to meet you, <span id="n"></span> 💕</h1>
-        <p>Let's check our compatibility...</p>
-
-        <div class="q-group">
-            <label>Pick a color that feels like you 🎨</label>
-            <div class="color-options" id="color-opts">
-                <div class="color-btn" style="background:#ffcdd2" onclick="selectColor(this, 'pink')"></div>
-                <div class="color-btn" style="background:#ef5350" onclick="selectColor(this, 'red')"></div>
-                <div class="color-btn" style="background:#ba68c8" onclick="selectColor(this, 'purple')"></div>
-                <div class="color-btn" style="background:#42a5f5" onclick="selectColor(this, 'blue')"></div>
-                <div class="color-btn" style="background:#81c784" onclick="selectColor(this, 'green')"></div>
-                <div class="color-btn" style="background:#ffb74d" onclick="selectColor(this, 'orange')"></div>
-                <div class="color-btn" style="background:#d7ccc8" onclick="selectColor(this, 'brown')"></div>
-                <div class="color-btn" style="background:#cfd8dc" onclick="selectColor(this, 'dark')"></div>
+            <div class="q-group">
+                <input id="gen-sender" type="text" placeholder="Your Name">
+                <input id="gen-receiver" type="text" placeholder="Their Name" style="margin-top:10px;">
+                <input id="gen-email" type="text" placeholder="Your Email (To notify you! 📧)" style="margin-top:10px;">
+                <div class="error-msg" id="gen-error" style="display:none;">Please enter both names! 🥺</div>
             </div>
-            <input type="hidden" id="favCheckColor">
-            <div class="error-msg">Pick a color! 🎨</div>
-        </div>
 
-        <div class="q-group">
-            <label>Favorite Food?</label>
-            <input id="favCheckFood" type="text" placeholder="E.g. Pizza, Sushi...">
-            <div class="error-msg">Can't skip food! 🍔</div>
-        </div>
-
-        <div class="q-group">
-            <label>Favorite Place?</label>
-            <input id="favCheckPlace" type="text" placeholder="E.g. Paris, Home...">
-            <div class="error-msg">Where's your fav place? 🌍</div>
-        </div>
-
-        <div class="q-group">
-            <label>Sea or Mountain?</label>
-            <div class="radio-group">
-                <input type="radio" id="sm1" name="seamountain" value="Sea"><label for="sm1">Sea 🌊</label>
-                <input type="radio" id="sm2" name="seamountain" value="Mountain"><label for="sm2">Mountain 🏔️</label>
+            <div id="gen-result"
+                style="display:none; margin:15px 0; padding:15px; background:rgba(255,255,255,0.8); border-radius:15px;">
+                <p style="font-size:0.9rem; margin-bottom:5px;">Send this link:</p>
+                <input type="text" id="gen-url" readonly style="font-size:0.8rem; width:90%; padding:8px;"
+                    onclick="this.select()">
+                <button onclick="copyLink()" style="margin-top:10px; padding:8px 20px; font-size:0.9rem;">Copy
+                    📋</button>
             </div>
-            <div class="error-msg">Choose one! ⛰️🌊</div>
+
+            <button onclick="generateLink()">Generate Link ✨</button>
+            <br>
+            <button onclick="next('s1')"
+                style="background:transparent; border:2px solid var(--primary); color:var(--primary); margin-top:10px;">Skip
+                (Just Demo) ⏩</button>
         </div>
 
-        <div class="q-group">
-            <label>Favorite Movie?</label>
-            <input id="favCheckMovie" type="text" placeholder="E.g. Titanic...">
-            <div class="error-msg">What do you watch? 🎬</div>
-        </div>
-
-        <div class="q-group">
-            <label>Favorite Song?</label>
-            <input id="favCheckSong" type="text" placeholder="Current fav song...">
-            <div class="error-msg">Give me a tune! 🎵</div>
-        </div>
-
-        <div class="q-group">
-            <label>Coffee or Tea?</label>
-            <div class="radio-group">
-                <input type="radio" id="ct1" name="coffeetea" value="Coffee"><label for="ct1">Coffee ☕</label>
-                <input type="radio" id="ct2" name="coffeetea" value="Tea"><label for="ct2">Tea 🍵</label>
+        <div class="section" id="s1">
+            <h1>Hey you 💫</h1>
+            <p>Lets see how much we match our vibes ✨</p>
+            <p style="font-size: 0.9rem; opacity: 0.8;">But first...</p>
+            <div class="q-group">
+                <input id="name" type="text" placeholder="Tell me your name ♡">
+                <div class="error-msg">I need to know your name! 🥺</div>
             </div>
-            <div class="error-msg">Pick your poison! ☕</div>
+            <button onclick="validateAndNext('s1', 's2')">Next 💗</button>
         </div>
 
-        <button onclick="validateAndNext('s2', 's3', match)">Match Our Vibes✨</button>
-    </div>
+        <!-- Enhanced Vibe Check Section -->
+        <div class="section" id="s2">
+            <h1>Nice to meet you, <span id="n"></span> 💕</h1>
+            <p>Let's check our compatibility...</p>
 
-    <div class="section" id="s3">
-        <h1>Checking our Vibe... 💭</h1>
-        <div id="percent" style="font-size:3rem">0%</div>
-        <p id="matchText" style="margin-top:20px; opacity:0; transition: opacity 1s;">Calculated based on your favorites
-            ✨</p>
-    </div>
-
-    <div class="section" id="s4">
-        <div class="heart"></div>
-        <h1>Will you be my Valentine? 🌹</h1>
-
-        <div id="plea-container"
-            style="min-height: 40px; margin: 10px 0; color: #d81b60; font-weight: bold; font-style: italic;"></div>
-
-        <button onclick="next('s5')">Yes 💖</button>
-        <button onclick="plead()">Not yet 🙈</button>
-    </div>
-
-    <div class="section" id="s5">
-        <h2>Let’s make it special 💞</h2>
-
-        <div class="q-group">
-            <p>When should we meet?</p>
-            <input type="date" id="date">
-            <div class="error-msg">Pick a date! 📅</div>
-        </div>
-
-        <div class="q-group">
-            <p>Where should we go?</p>
-            <div class="options">
-                <input id="p1" type="radio" name="place" value="Cozy Café"><label for="p1">Cozy Café</label>
-                <input id="p2" type="radio" name="place" value="Long Drive"><label for="p2">Long Drive</label>
-                <input id="p3" type="radio" name="place" value="Rooftop Dinner"><label for="p3">Rooftop Dinner</label>
-                <input id="p4" type="radio" name="place" value="Movie Hall"><label for="p4">Movie Hall</label>
-                <input id="p5" type="radio" name="place" value="Park Walk"><label for="p5">Evening Walk</label>
-                <input id="p6" type="radio" name="place" value="Beach"><label for="p6">Beach</label>
-                <input id="p7" type="radio" name="place" value="Mountain View"><label for="p7">Mountain View</label>
-                <input id="p8" type="radio" name="place" value="Surprise Date"><label for="p8">Surprise</label>
+            <div class="q-group">
+                <label>Pick a color that feels like you 🎨</label>
+                <div class="color-options" id="color-opts">
+                    <div class="color-btn" style="background:#ffcdd2" onclick="selectColor(this, 'pink')"></div>
+                    <div class="color-btn" style="background:#ef5350" onclick="selectColor(this, 'red')"></div>
+                    <div class="color-btn" style="background:#ba68c8" onclick="selectColor(this, 'purple')"></div>
+                    <div class="color-btn" style="background:#42a5f5" onclick="selectColor(this, 'blue')"></div>
+                    <div class="color-btn" style="background:#81c784" onclick="selectColor(this, 'green')"></div>
+                    <div class="color-btn" style="background:#ffb74d" onclick="selectColor(this, 'orange')"></div>
+                    <div class="color-btn" style="background:#d7ccc8" onclick="selectColor(this, 'brown')"></div>
+                    <div class="color-btn" style="background:#cfd8dc" onclick="selectColor(this, 'dark')"></div>
+                </div>
+                <input type="hidden" id="favCheckColor">
+                <div class="error-msg">Pick a color! 🎨</div>
             </div>
-            <div class="error-msg">Pick a place! 📍</div>
-        </div>
 
-        <div class="q-group">
-            <p>What should we eat?</p>
-            <div class="options">
-                <input id="f1" type="radio" name="food" value="Pizza"><label for="f1">Pizza</label>
-                <input id="f2" type="radio" name="food" value="Burger"><label for="f2">Burger</label>
-                <input id="f3" type="radio" name="food" value="Sushi"><label for="f3">Sushi</label>
-                <input id="f4" type="radio" name="food" value="Pasta"><label for="f4">Pasta</label>
-                <input id="f5" type="radio" name="food" value="Street Food"><label for="f5">Street Food</label>
-                <input id="f6" type="radio" name="food" value="Desserts"><label for="f6">Desserts</label>
-                <input id="f7" type="radio" name="food" value="Coffee & Cake"><label for="f7">Coffee & Cake</label>
-                <input id="f8" type="radio" name="food" value="Surprise Meal"><label for="f8">Surprise</label>
+            <div class="q-group">
+                <label>Favorite Food?</label>
+                <input id="favCheckFood" type="text" placeholder="E.g. Pizza, Sushi...">
+                <div class="error-msg">Can't skip food! 🍔</div>
             </div>
-            <div class="error-msg">Pick some food! 🍕</div>
-        </div>
 
-        <div class="q-group">
-            <p>Movie vibe?</p>
-            <div class="options">
-                <input id="m1" type="radio" name="movie" value="Romantic"><label for="m1">Romantic</label>
-                <input id="m2" type="radio" name="movie" value="Comedy"><label for="m2">Comedy</label>
-                <input id="m3" type="radio" name="movie" value="Drama"><label for="m3">Drama</label>
-                <input id="m4" type="radio" name="movie" value="Anime"><label for="m4">Anime</label>
-                <input id="m5" type="radio" name="movie" value="Action"><label for="m5">Action</label>
-                <input id="m6" type="radio" name="movie" value="Classic Love"><label for="m6">Classic Love</label>
-                <input id="m7" type="radio" name="movie" value="Late Night Talks"><label for="m7">No Movie</label>
-                <input id="m8" type="radio" name="movie" value="Surprise Movie"><label for="m8">Surprise</label>
+            <div class="q-group">
+                <label>Favorite Place?</label>
+                <input id="favCheckPlace" type="text" placeholder="E.g. Paris, Home...">
+                <div class="error-msg">Where's your fav place? 🌍</div>
             </div>
-            <div class="error-msg">Pick a vibe! 🎬</div>
+
+            <div class="q-group">
+                <label>Sea or Mountain?</label>
+                <div class="radio-group">
+                    <input type="radio" id="sm1" name="seamountain" value="Sea"><label for="sm1">Sea 🌊</label>
+                    <input type="radio" id="sm2" name="seamountain" value="Mountain"><label for="sm2">Mountain
+                        🏔️</label>
+                </div>
+                <div class="error-msg">Choose one! ⛰️🌊</div>
+            </div>
+
+            <div class="q-group">
+                <label>Favorite Movie?</label>
+                <input id="favCheckMovie" type="text" placeholder="E.g. Titanic...">
+                <div class="error-msg">What do you watch? 🎬</div>
+            </div>
+
+            <div class="q-group">
+                <label>Favorite Song?</label>
+                <input id="favCheckSong" type="text" placeholder="Current fav song...">
+                <div class="error-msg">Give me a tune! 🎵</div>
+            </div>
+
+            <div class="q-group">
+                <label>Coffee or Tea?</label>
+                <div class="radio-group">
+                    <input type="radio" id="ct1" name="coffeetea" value="Coffee"><label for="ct1">Coffee ☕</label>
+                    <input type="radio" id="ct2" name="coffeetea" value="Tea"><label for="ct2">Tea 🍵</label>
+                </div>
+                <div class="error-msg">Pick your poison! ☕</div>
+            </div>
+
+            <button onclick="validateAndNext('s2', 's3', match)">Match Our Vibes✨</button>
         </div>
 
-
-        <div class="q-group">
-            <p>Anything else you want to say? 💌</p>
-            <input id="special-msg" type="text" placeholder="Your message here...">
+        <div class="section" id="s3">
+            <h1>Checking our Vibe... 💭</h1>
+            <div id="percent" style="font-size:3rem">0%</div>
+            <p id="matchText" style="margin-top:20px; opacity:0; transition: opacity 1s;">Calculated based on your
+                favorites ✨</p>
         </div>
 
-        <button onclick="validateAndFinal()">Make it Official 💖</button>
-    </div>
+        <div class="section" id="s4">
+            <div class="heart"></div>
+            <h1>Will you be my Valentine? 🌹</h1>
 
-    <div class="section" id="s6">
-        <h1>It’s a date, <span id="fn"></span> 💕</h1>
-        <p id="msg"></p>
-        <p id="quote" style="margin-top:15px;font-style:italic;opacity:.8"></p>
-    </div>
+            <div id="plea-container"
+                style="min-height: 40px; margin: 10px 0; color: #d81b60; font-weight: bold; font-style: italic;"></div>
 
-    <footer
-        style="text-align:center; position:fixed; bottom:0; width:100%; padding:10px 0; background:rgba(255,255,255,0.7); backdrop-filter:blur(5px); font-size:14px; font-weight:bold; color:#d81b60; z-index:100;">
+            <button onclick="next('s5')">Yes 💖</button>
+            <button onclick="plead()">Not yet 🙈</button>
+        </div>
+
+        <div class="section" id="s5">
+            <h2>Let’s make it special 💞</h2>
+
+            <div class="q-group">
+                <p>When should we meet?</p>
+                <input type="date" id="date">
+                <div class="error-msg">Pick a date! 📅</div>
+            </div>
+
+            <div class="q-group">
+                <p>Where should we go?</p>
+                <div class="options">
+                    <input id="p1" type="radio" name="place" value="Cozy Café"><label for="p1">Cozy Café</label>
+                    <input id="p2" type="radio" name="place" value="Long Drive"><label for="p2">Long Drive</label>
+                    <input id="p3" type="radio" name="place" value="Rooftop Dinner"><label for="p3">Rooftop
+                        Dinner</label>
+                    <input id="p4" type="radio" name="place" value="Movie Hall"><label for="p4">Movie Hall</label>
+                    <input id="p5" type="radio" name="place" value="Park Walk"><label for="p5">Evening Walk</label>
+                    <input id="p6" type="radio" name="place" value="Beach"><label for="p6">Beach</label>
+                    <input id="p7" type="radio" name="place" value="Mountain View"><label for="p7">Mountain View</label>
+                    <input id="p8" type="radio" name="place" value="Surprise Date"><label for="p8">Surprise</label>
+                </div>
+                <div class="error-msg">Pick a place! 📍</div>
+            </div>
+
+            <div class="q-group">
+                <p>What should we eat?</p>
+                <div class="options">
+                    <input id="f1" type="radio" name="food" value="Pizza"><label for="f1">Pizza</label>
+                    <input id="f2" type="radio" name="food" value="Burger"><label for="f2">Burger</label>
+                    <input id="f3" type="radio" name="food" value="Sushi"><label for="f3">Sushi</label>
+                    <input id="f4" type="radio" name="food" value="Pasta"><label for="f4">Pasta</label>
+                    <input id="f5" type="radio" name="food" value="Street Food"><label for="f5">Street Food</label>
+                    <input id="f6" type="radio" name="food" value="Desserts"><label for="f6">Desserts</label>
+                    <input id="f7" type="radio" name="food" value="Coffee & Cake"><label for="f7">Coffee & Cake</label>
+                    <input id="f8" type="radio" name="food" value="Surprise Meal"><label for="f8">Surprise</label>
+                </div>
+                <div class="error-msg">Pick some food! 🍕</div>
+            </div>
+
+            <div class="q-group">
+                <p>Movie vibe?</p>
+                <div class="options">
+                    <input id="m1" type="radio" name="movie" value="Romantic"><label for="m1">Romantic</label>
+                    <input id="m2" type="radio" name="movie" value="Comedy"><label for="m2">Comedy</label>
+                    <input id="m3" type="radio" name="movie" value="Drama"><label for="m3">Drama</label>
+                    <input id="m4" type="radio" name="movie" value="Anime"><label for="m4">Anime</label>
+                    <input id="m5" type="radio" name="movie" value="Action"><label for="m5">Action</label>
+                    <input id="m6" type="radio" name="movie" value="Classic Love"><label for="m6">Classic Love</label>
+                    <input id="m7" type="radio" name="movie" value="Late Night Talks"><label for="m7">No Movie</label>
+                    <input id="m8" type="radio" name="movie" value="Surprise Movie"><label for="m8">Surprise</label>
+                </div>
+                <div class="error-msg">Pick a vibe! 🎬</div>
+            </div>
+
+            <div class="q-group">
+                <p>Anything else you want to say? 💌</p>
+                <input id="special-msg" type="text" placeholder="Your message here...">
+            </div>
+
+            <button onclick="validateAndFinal()">Make it Official 💖</button>
+        </div>
+
+        <div class="section" id="s6">
+            <h1>It’s a date, <span id="fn"></span> 💕</h1>
+            <p id="msg"></p>
+            <p id="quote" style="margin-top:15px;font-style:italic;opacity:.8"></p>
+        </div>
+    </main>
+
+    <footer class="footer">
         Created By: <a href="https://www.linkedin.com/in/ishandhakalofficial/" target="_blank"
             style="color: inherit; text-decoration: none;">@ishandhakalofficial</a> | © 2026 All rights reserved.
     </footer>
