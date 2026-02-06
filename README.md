@@ -52,3 +52,15 @@ for-my-valentine/
 
 ## 📜 License
 MIT License © 2026 Ishan Dhakal
+
+---
+
+## 📧 How to get Responses in Email
+Since this is a static project, you can use **Formspree** (Free) to get an email whenever someone completes the plan:
+
+1. Go to [Formspree.io](https://formspree.io/) and create an account.
+2. Create a **New Form** and name it "Valentine App".
+3. Copy your **Form Endpoint** (looks like `https://formspree.io/f/xyz123`).
+4. Open `js/responses.js` in your code.
+5. Find the line `const EMAIL_ENDPOINT = "";` and paste your URL inside the quotes.
+6. **Save & Deploy!** Now, every "Yes" will arrive directly in your inbox.
