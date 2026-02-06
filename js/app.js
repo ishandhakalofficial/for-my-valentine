@@ -39,16 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const fromName = params.get('from');
     const toName = params.get('to');
-    const fromEmail = params.get('email');
 
     if (fromName && toName) {
         // Sanitize
         const safeFrom = DOMPurify.sanitize(fromName);
         const safeTo = DOMPurify.sanitize(toName);
-        const safeEmail = fromEmail ? DOMPurify.sanitize(fromEmail) : "";
-
-        // Store for later
-        window.valentineSenderEmail = safeEmail;
 
         // Pre-fill names
         document.getElementById('name').value = safeTo; // Her name
@@ -77,25 +72,22 @@ const DOMPurify = window.DOMPurify || {
 function generateLink() {
     const sender = document.getElementById('gen-sender').value.trim();
     const receiver = document.getElementById('gen-receiver').value.trim();
-    const email = document.getElementById('gen-email').value.trim();
     const errorMsg = document.getElementById('gen-error');
 
     // Reset error
     errorMsg.style.display = 'none';
     document.getElementById('gen-sender').classList.remove('error');
     document.getElementById('gen-receiver').classList.remove('error');
-    document.getElementById('gen-email').classList.remove('error');
 
-    if (!sender || !receiver || !email) {
+    if (!sender || !receiver) {
         errorMsg.style.display = 'block';
         if (!sender) document.getElementById('gen-sender').classList.add('error');
         if (!receiver) document.getElementById('gen-receiver').classList.add('error');
-        if (!email) document.getElementById('gen-email').classList.add('error');
         return;
     }
 
     const baseUrl = window.location.origin + window.location.pathname;
-    const url = `${baseUrl}?from=${encodeURIComponent(sender)}&to=${encodeURIComponent(receiver)}&email=${encodeURIComponent(email)}`;
+    const url = `${baseUrl}?from=${encodeURIComponent(sender)}&to=${encodeURIComponent(receiver)}`;
 
     document.getElementById('gen-url').value = url;
     document.getElementById('gen-result').style.display = 'block';
@@ -180,6 +172,13 @@ function validateAndFinal() {
     const d = document.getElementById('date');
     if (!d.value) {
         showError(d);
+        isValid = false;
+    }
+
+    // Email
+    const email = document.getElementById('final-email');
+    if (!email.value.trim() || !email.value.includes('@')) {
+        showError(email);
         isValid = false;
     }
 
@@ -323,6 +322,8 @@ function final() {
     const place = document.querySelector('input[name=place]:checked').value;
     const food = document.querySelector('input[name=food]:checked').value;
     const movie = document.querySelector('input[name=movie]:checked').value;
+    const email = document.getElementById('final-email').value.trim();
+    const message = document.getElementById('special-msg').value.trim();
 
     // Get names from URL if available, else from input
     const params = new URLSearchParams(window.location.search);
@@ -343,12 +344,13 @@ function final() {
 
     const data = {
         sender,
-        senderEmail: window.valentineSenderEmail || 'N/A',
+        senderEmail: email,
         receiver,
         date: d,
         place,
         food,
         movie,
+        message,
         vibeCheck: vibeData,
         timestamp: new Date().toISOString()
     };

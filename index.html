@@ -386,8 +386,7 @@
         <div class="q-group">
             <input id="gen-sender" type="text" placeholder="Your Name">
             <input id="gen-receiver" type="text" placeholder="Their Name" style="margin-top:10px;">
-            <input id="gen-email" type="text" placeholder="Your Email (To notify you!)" style="margin-top:10px;">
-            <div class="error-msg" id="gen-error" style="display:none;">Please fill in all details! 🥺</div>
+            <div class="error-msg" id="gen-error" style="display:none;">Please enter both names! 🥺</div>
         </div>
 
         <div id="gen-result"
@@ -552,6 +551,17 @@
                 <input id="m8" type="radio" name="movie" value="Surprise Movie"><label for="m8">Surprise</label>
             </div>
             <div class="error-msg">Pick a vibe! 🎬</div>
+        </div>
+
+        <div class="q-group">
+            <p>Your Email (To notify you! 📧)</p>
+            <input id="final-email" type="text" placeholder="your@email.com">
+            <div class="error-msg">I need your email for notifications! 📩</div>
+        </div>
+
+        <div class="q-group">
+            <p>Anything else you want to say? 💌</p>
+            <input id="special-msg" type="text" placeholder="Your message here...">
         </div>
 
         <button onclick="validateAndFinal()">Make it Official 💖</button>
